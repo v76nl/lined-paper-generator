@@ -1,0 +1,181 @@
+.app-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* 左側の設定パネル */
+.settings-panel {
+    width: 300px;
+    background-color: #ffffff;
+    border-right: 1px solid #ccc;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.settings-panel h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.setting-group {
+    margin-bottom: 15px;
+}
+
+.setting-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.setting-group input[type="number"],
+.setting-group select,
+.setting-group input[type="color"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #999;
+}
+
+.setting-group input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.setting-info {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.print-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.print-button:hover {
+    background-color: #555;
+}
+
+/* 右側のプレビューエリア */
+.preview-area {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 用紙のスタイル */
+.paper {
+    width: 210mm;
+    height: 297mm;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    padding: 15mm 20mm 15mm 20mm;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.header {
+    height: 15mm;
+    position: relative;
+    margin-bottom: 8mm;
+}
+
+.header-bottom-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: 1px solid #000;
+}
+
+.header-left {
+    position: absolute;
+    left: 5mm;
+    bottom: 2mm;
+    font-size: 14pt;
+}
+
+.header-center {
+    position: absolute;
+    left: 60%;
+    transform: translateX(-50%);
+    bottom: 2mm;
+    font-size: 12pt;
+}
+
+.header-right {
+    position: absolute;
+    right: 5mm;
+    bottom: 2mm;
+    font-size: 12pt;
+    letter-spacing: 2mm;
+}
+
+.lines-container {
+    width: 100%;
+}
+
+.line-row {
+    position: relative;
+}
+
+.line-number {
+    position: absolute;
+    left: -12mm;
+    width: 10mm;
+    text-align: right;
+    font-size: 10pt;
+    color: #666;
+    bottom: 1mm;
+}
+
+.footer {
+    position: absolute;
+    bottom: 10mm;
+    right: 20mm;
+    font-size: 10pt;
+}
+
+/* 印刷時の設定 */
+@media print {
+    /* GUI部分を非表示 */
+    .settings-panel {
+        display: none;
+    }
+
+    .preview-area {
+        padding: 0;
+        overflow: visible;
+        display: block;
+    }
+
+    .paper {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+    }
+
+    /* 最後のページは改ページしない */
+    .paper:last-child {
+        page-break-after: auto;
+    }
+
+    @page {
+        size: A4;
+        margin: 0;
+    }
+}
